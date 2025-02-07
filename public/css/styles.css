@@ -1,7 +1,7 @@
 html {
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #526D82 50%, #9DB2BF 50%);
-  min-height: 1000px;
+  min-height: 100vh;
   font-family: 'helvetica neue';
 }
 
@@ -51,6 +51,7 @@ p {
   font-weight: 200;
   color: #27374D;
   font-family: 'Times New Roman', Times, serif;
+  overflow-x: scroll;
 }
 
 form.item { 
@@ -68,6 +69,11 @@ button {
   font-size: 30px;
   padding-bottom: 6px;
   border-width: 0;
+}
+
+button:hover {
+  background-color: #4b6487;
+  color: #DDE6ED;
 }
 
 input[type="text"] {

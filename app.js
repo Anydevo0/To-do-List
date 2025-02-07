@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://todolist:5EkYuLTgWXKSdEDD@cluster0.ev8hu9f.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser: true} );
+mongoose.connect("mongodb+srv://todolist:x3VUeCvMvbQS786m@cluster0.ev8hu9f.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser: true} );
 
 const itemsSchema = {
     name: String
@@ -19,15 +19,15 @@ const itemsSchema = {
 const Item = mongoose.model("Item", itemsSchema);
 
 const item1 = new Item({
-    name: "<-- Welcome to your todolist!"
+    name: "Add /customname in url to get your personal todolist"
 });
 
 const item2 = new Item({
-    name: "<-- Hit the + button to add new item." 
+    name: "Add /delete to delete your personal list" 
 });
 
 const item3 = new Item({
-    name: "<-- Hit this to delete an item."
+    name: "<-- check here to delete an item."
 });
 
 const defaultItems = [item1, item2, item3];
@@ -75,6 +75,20 @@ app.get("/:customListName", function(req, res){
       
 });
 
+app.get("/:customListName/delete", function(req, res){
+    const toDeleteList = _.capitalize(req.params.customListName);
+
+    if(toDeleteList != '') {
+        List.findOneAndDelete({name: toDeleteList}).then((foundList) => {
+            if(!foundList) {
+                
+            } else {
+                res.redirect('/')
+            }
+        })
+    }
+})
+
 app.post("/", function(req, res){
     
     const itemName = req.body.newItem;    
@@ -86,12 +100,12 @@ app.post("/", function(req, res){
 
     if(listName === "Today"){
         item.save();
-        res.redirect("/");
+        res.redirect("/");      
     } else {
         List.findOne({name: listName}).then((foundList) => {
             foundList.items.push(item);
             foundList.save();
-            res.redirect("/" + listName);   
+            res.redirect("/" + listName);       
         });
     } 
 });
@@ -107,17 +121,10 @@ app.post("/delete", function(req, res){
         });
     } else {
         List.findOneAndUpdate({name: listName}, {$pull: {items: {_id: checkedItemId}}}).then((foundList) => {
-            res.redirect("/" + listName)
+            res.redirect("/" + listName);
         })
     }
-    
 })
-
-
-app.get("/work", function(req, res){
-    res.render("lists", {listTitle: "Work List", newListItems: workItems})
-})
-
 
 
 app.listen('3000', function () {
