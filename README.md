@@ -51,5 +51,4 @@ Go to: [http://localhost:3000](http://localhost:3000)
 - Add a task by entering text and clicking **Add**.
 - Create a custom list by navigating to `http://localhost:3000/customListName`.
 - Delete a task by clicking the checkbox next to it.
-- Delete a custom list by visiting `http://localhost:3000/customListName/delete`.
-- 
+- Delete a custom list by visiting `http://localhost:3000/customListName/delete`. 
