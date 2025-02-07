@@ -52,8 +52,4 @@ Go to: [http://localhost:3000](http://localhost:3000)
 - Create a custom list by navigating to `http://localhost:3000/customListName`.
 - Delete a task by clicking the checkbox next to it.
 - Delete a custom list by visiting `http://localhost:3000/customListName/delete`.
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
+- 
